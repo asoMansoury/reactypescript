@@ -4,15 +4,15 @@ import {type ReactNode,type PropsWithChildren,type FC} from 'react';
 //     children:ReactNode;
 // }
 
-type CourseGoalProps = PropsWithChildren<{title:string}>;
+type CourseGoalProps = PropsWithChildren<{title:string,id:number,onDeleteFunc:(id:number)=>void}>;
 
-const CourseGoal:FC<CourseGoalProps>=({title,children})=>{
+const CourseGoal:FC<CourseGoalProps>=({title,id,onDeleteFunc,children})=>{
     return <article>
     <div>
         <h2>{title}</h2>
         <p>{children}</p>
     </div>
-    <button>Delete</button>
+    <button onClick={(e)=>onDeleteFunc(id)}>Delete</button>
 </article>
 }
 export default CourseGoal;
