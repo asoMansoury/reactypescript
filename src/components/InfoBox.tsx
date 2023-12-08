@@ -1,31 +1,35 @@
-import { FC, ReactNode } from "react"
+import { ComponentProps, ComponentPropsWithRef, ComponentPropsWithoutRef, FC, ReactNode } from "react"
 
 type HintBoxProps = {
     mode: 'hint'
     children: ReactNode
 }
+
 type WarningBoxProps = {
     mode: 'warning',
     severity: 'low' | 'medium' | 'high'
     children: ReactNode
 
-}
-type InfoBoxProps = HintBoxProps | WarningBoxProps;
+} 
 
-const InfoBox: FC<InfoBoxProps> = (props) => {
-    const { children, mode } = props;
+type InfoBoxProps = HintBoxProps | WarningBoxProps & ComponentPropsWithoutRef<'button'>;
+
+const InfoBox =(passedprops:InfoBoxProps) => {
+    const { children, mode,...props } = passedprops;
     if (mode === 'hint') {
         return (
             <aside className="infobox infobox-hint">
-                <p>{children}</p>
+                <p >{children}</p>
+                <button {...props}>hhh</button>
             </aside>
         )
     }
 
-    const { severity } = props;
+    const { severity } = passedprops;
     return (
         <aside className={`infobox infobox-warning warning--${severity}`}>
             <h2>warning</h2>
+            <button {...props}>hhh</button>
             <p>{children}</p>
         </aside>
     )

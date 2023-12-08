@@ -17,7 +17,7 @@ export default function CourseGoalList({ goals, onDeleteFunc }: CourseGoalListPr
 
     let warningBox: ReactNode;
     if (goals.length >= 4) {
-        warningBox = <InfoBox severity="high" mode="warning" >You'r collecting a lof of goals. Don't put too much on your plate!</InfoBox>
+        warningBox = <InfoBox disabled={true} data-attr="hi" severity="high" mode="warning" >You'r collecting a lof of goals. Don't put too much on your plate!</InfoBox>
     }
     return (
         <>
