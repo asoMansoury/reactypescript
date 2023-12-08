@@ -5,12 +5,14 @@ import './App.css'
 import Header from './components/Header';
 import CourseGoalList from './components/CourseGoalList';
 import NewGoal from './components/NewGoal';
+
 export type CourseGoalType = {
   title: string;
   description: string;
   id: number;
 };
 function App() {
+
   // const [goals,setGoals] = useState<Array<CourseGoal>>([]);
   const [goals, setGoals] = useState<CourseGoalType[]>([]);
 
