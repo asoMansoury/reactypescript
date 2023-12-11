@@ -12,7 +12,7 @@ export default function Header({image,children}:HeaderProps){
     var timersCtx =  useTimersContext()!;
 
     return <header>
-        <Button>{timersCtx.isRunning ? 'Stop': 'Start'}</Button>
+        <Button onClick={timersCtx.isRunning? timersCtx.stopTimers:timersCtx.startTimers}>{timersCtx.isRunning ? 'Stop': 'Start'}</Button>
         <img {...image}></img>
         {children}
     </header>
