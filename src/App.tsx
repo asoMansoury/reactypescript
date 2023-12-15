@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import goalsImg from './assets/react.svg';
 
 import './App.css'
@@ -8,14 +8,44 @@ import NewGoal from './components/NewGoal';
 import Container from './components/BasicComponent/Container';
 import Button from './components/BasicComponent/Button';
 import TimersContextProvider from './store/time-context';
+import { get } from './util/http';
 
+type RawDataBlogPost = {
+  id:number;
+  userId:number;
+  title:string;
+  body:string;
+}
+
+export type BlogPost = {
+  id:number;
+  title:string;
+  text:string;
+}
 
 export type CourseGoalType = {
   title: string;
   description: string;
   id: number;
 };
+
 function App() {
+  const [fetchedPosts,setFetchedPosts] =  useState<unknown>();
+
+  useEffect(()=>{
+    async function  fetchPosts(){
+      var data = (await get('https://jsonplaceholder.typicode.com/posts')) as RawDataBlogPost[];
+      const blogPosts:BlogPost[] = data.map((rawPost)=>{
+        return {
+          id:rawPost.id,
+          title: rawPost.title,
+          text:rawPost.body
+        }
+      });
+      setFetchedPosts(blogPosts);
+    }
+
+  },[])
 
   // const [goals,setGoals] = useState<Array<CourseGoal>>([]);
   const [goals, setGoals] = useState<CourseGoalType[]>([]);
